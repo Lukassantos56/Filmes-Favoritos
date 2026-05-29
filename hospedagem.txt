@@ -1,0 +1,116 @@
+COMO HOSPEDAR NA INTERNET - FILMES FAVORITOS
+=============================================
+
+Seu site usa Node.js + PostgreSQL. Para acessar de qualquer lugar
+(celular com 4G, outra Wi-Fi, etc.), use:
+
+  Banco na nuvem: Neon (gratis)  ->  https://neon.tech
+  Servidor Node:  Render (gratis) ->  https://render.com
+
+O codigo ja esta preparado: server.js le DATABASE_URL do ambiente.
+
+
+PASSO 1 - CRIAR BANCO NO NEON
+-----------------------------
+
+1. Acesse https://neon.tech e crie uma conta (GitHub ou e-mail)
+2. Clique em "New Project"
+3. Escolha um nome (ex: filmes-favoritos) e regiao proxima (ex: US East)
+4. Depois de criar, va em "Connection details" ou "Dashboard"
+5. Copie a "Connection string" (formato postgresql://...)
+   - Use a que inclui senha, ou anote usuario, senha, host e banco
+6. Guarde essa URL — voce vai colar no Render no passo 3
+
+
+PASSO 2 - SUBIR O CODIGO NO GITHUB
+----------------------------------
+
+Voce precisa do codigo em um repositorio GitHub para o Render puxar.
+
+Opcao A — Git (recomendado):
+  1. Instale Git: https://git-scm.com/download/win
+  2. Crie repo em https://github.com/new (ex: filmes-favoritos)
+  3. No terminal, na pasta do projeto:
+
+     git init
+     git add .
+     git commit -m "Preparar deploy na nuvem"
+     git branch -M main
+     git remote add origin https://github.com/SEU_USUARIO/filmes-favoritos.git
+     git push -u origin main
+
+  NAO suba o arquivo .env (ja esta no .gitignore).
+
+Opcao B — Sem Git:
+  1. No GitHub, crie repo vazio
+  2. Use "Upload files" e envie tudo EXCETO:
+     - node_modules/
+     - .env
+
+
+PASSO 3 - DEPLOY NO RENDER
+--------------------------
+
+1. Acesse https://render.com e crie conta (pode usar GitHub)
+2. Dashboard -> "New" -> "Web Service"
+3. Conecte seu repositorio GitHub e selecione o projeto
+4. Configuracao:
+
+   Name:           filmes-favoritos (ou outro nome)
+   Region:         mesma regiao do Neon, se possivel
+   Branch:         main
+   Runtime:        Node
+   Build Command:  npm install
+   Start Command:  npm start
+   Instance Type:  Free
+
+5. Em "Environment" -> "Environment Variables", adicione:
+
+   DATABASE_URL = (cole a connection string completa do Neon)
+
+   Exemplo:
+   postgresql://usuario:senha@ep-xxxx.us-east-1.aws.neon.tech/neondb?sslmode=require
+
+6. Clique em "Create Web Service"
+7. Aguarde o deploy (alguns minutos na primeira vez)
+8. Quando ficar "Live", voce recebe uma URL tipo:
+   https://filmes-favoritos.onrender.com
+
+
+PASSO 4 - TESTAR
+----------------
+
+1. Abra a URL do Render no celular (qualquer rede)
+2. Cadastre um filme de teste
+3. Se der erro 500, veja os "Logs" no painel do Render
+
+
+OBSERVACOES IMPORTANTES
+-----------------------
+
+Plano gratis do Render:
+  - O site "dorme" apos ~15 min sem acesso
+  - A primeira visita depois disso pode demorar 30-60 segundos
+  - Para uso pessoal leve, costuma ser suficiente
+
+Plano gratis do Neon:
+  - Banco PostgreSQL com limite generoso para projetos pequenos
+
+Seguranca:
+  - A senha do banco NAO vai mais no codigo (server.js)
+  - Use so variaveis de ambiente no Render
+  - Nunca commite o arquivo .env
+
+Filmes que voce ja tem no PC:
+  - O banco local e o da nuvem sao separados
+  - Os filmes do PostgreSQL local NAO migram sozinhos
+  - Voce precisaria cadastrar de novo ou exportar/importar manualmente
+
+
+RODAR LOCALMENTE (LEMBRETE)
+---------------------------
+
+1. PostgreSQL ativo no PC
+2. Arquivo .env com DB_PASSWORD (ja criado na pasta do projeto)
+3. node server.js
+4. Abrir: http://localhost:3000

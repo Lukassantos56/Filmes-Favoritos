@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Movie Romantic | Filmes Favoritos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+
+      if (location.protocol === 'file:') {
+
+        location.replace('http://localhost:3000/');
+
+      }
+
+    </script>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <span class="logo">GALAK</span>
+
+    </header>
+
+
+
+    <section class="hero">
+
+        <img src="img/galak.jpeg" alt="Cena romântica de filme" class="hero-bg">
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <h1>Movie Romantic</h1>
+
+            <p class="hero-tagline">Cadastre, visualize e gerencie seus filmes favoritos</p>
+
+        </div>
+
+    </section>
+
+
+
+    <main class="main">
+
+        <section class="painel">
+
+            <h2 class="secao-titulo">Adicionar à lista</h2>
+
+            <form id="filmes-form" class="form-filmes">
+
+                <input type="text" id="nome-filme" placeholder="Nome do filme" required>
+
+                <input type="text" id="sinopse-filme" placeholder="Sinopse" required>
+
+                <input type="text" id="genero-filme" placeholder="Gênero" required>
+
+                <input type="text" id="data-lancamento-filme" placeholder="Data de lançamento" required>
+
+                <button type="submit" id="adicionar" class="btn-primario">Adicionar</button>
+
+            </form>
+
+            <p class="dica">Colocar data assim: 29/03/2026</p>
+
+            <p id="mensagem" role="status" class="mensagem"></p>
+
+        </section>
+
+
+
+        <section class="lista-filmes" aria-labelledby="titulo-lista">
+
+            <h2 id="titulo-lista" class="secao-titulo">Minha lista</h2>
+
+            <p id="lista-status" class="lista-status">Carregando...</p>
+
+            <div id="grid-filmes" class="grid-filmes"></div>
+
+        </section>
+
+    </main>
+
+
+
+    <script src="frontend.js"></script>
+
+</body>
+
+</html>
+
