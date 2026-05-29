@@ -1,22 +1,17 @@
-Lógica do formulário: frontend.js
-API e banco: server.js
-
-Para rodar:
-  node server.js
-  Abrir no navegador: http://localhost:3000
-
-Se abrir index.html pelo Explorer (file://), a página redireciona para localhost:3000.
-O servidor precisa estar rodando antes.
-
-Requisitos locais:
-  - PostgreSQL rodando na porta 5432
-  - Arquivo .env com DB_PASSWORD (copie de .env.example)
-
-Hospedar na internet (acessar de qualquer lugar):
-  - Veja o passo a passo em hospedagem.txt (Render + Neon, gratis)
-
-GitHub (repositorio ja preparado localmente):
-  1. Abra PowerShell nesta pasta
-  2. gh auth login   (escolha GitHub.com, HTTPS, login pelo navegador)
-  3. .\subir-github.ps1
-  Ou manualmente: gh repo create filmes-favoritos --public --source=. --remote=origin --push
+Lógica do formulário: frontend.js
+API e banco: server.js
+
+Para rodar:
+  node server.js
+  Abrir no navegador: http://localhost:3000
+
+Se abrir index.html pelo Explorer (file://), a página redireciona para localhost:3000.
+O servidor precisa estar rodando antes.
+
+Requisitos locais:
+  - PostgreSQL rodando na porta 5432
+  - Arquivo .env com DB_PASSWORD (copie de .env.example)
+
+Hospedar na internet (qualquer rede, sem Wi-Fi do PC):
+  - Passo a passo completo em hospedagem.txt (Railway recomendado)
+

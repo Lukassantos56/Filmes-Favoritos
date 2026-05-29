@@ -1,116 +1,87 @@
 COMO HOSPEDAR NA INTERNET - FILMES FAVORITOS
 =============================================
 
-Seu site usa Node.js + PostgreSQL. Para acessar de qualquer lugar
-(celular com 4G, outra Wi-Fi, etc.), use:
+Seu site precisa de Node.js + PostgreSQL. O caminho mais simples e tudo
+em um lugar so: Railway (site + banco na mesma conta).
 
-  Banco na nuvem: Neon (gratis)  ->  https://neon.tech
-  Servidor Node:  Render (gratis) ->  https://render.com
+  Railway  ->  https://railway.app
 
-O codigo ja esta preparado: server.js le DATABASE_URL do ambiente.
+Alternativas (dois servicos separados):
+  - Render (site) + Neon (banco)
+  - Fly.io, VPS, etc.
 
-
-PASSO 1 - CRIAR BANCO NO NEON
------------------------------
-
-1. Acesse https://neon.tech e crie uma conta (GitHub ou e-mail)
-2. Clique em "New Project"
-3. Escolha um nome (ex: filmes-favoritos) e regiao proxima (ex: US East)
-4. Depois de criar, va em "Connection details" ou "Dashboard"
-5. Copie a "Connection string" (formato postgresql://...)
-   - Use a que inclui senha, ou anote usuario, senha, host e banco
-6. Guarde essa URL — voce vai colar no Render no passo 3
+O codigo ja usa a variavel DATABASE_URL no server.js.
 
 
-PASSO 2 - SUBIR O CODIGO NO GITHUB
-----------------------------------
-
-Voce precisa do codigo em um repositorio GitHub para o Render puxar.
-
-Opcao A — Git (recomendado):
-  1. Instale Git: https://git-scm.com/download/win
-  2. Crie repo em https://github.com/new (ex: filmes-favoritos)
-  3. No terminal, na pasta do projeto:
-
-     git init
-     git add .
-     git commit -m "Preparar deploy na nuvem"
-     git branch -M main
-     git remote add origin https://github.com/SEU_USUARIO/filmes-favoritos.git
-     git push -u origin main
-
-  NAO suba o arquivo .env (ja esta no .gitignore).
-
-Opcao B — Sem Git:
-  1. No GitHub, crie repo vazio
-  2. Use "Upload files" e envie tudo EXCETO:
-     - node_modules/
-     - .env
-
-
-PASSO 3 - DEPLOY NO RENDER
+OPCAO RECOMENDADA: RAILWAY
 --------------------------
 
-1. Acesse https://render.com e crie conta (pode usar GitHub)
-2. Dashboard -> "New" -> "Web Service"
-3. Conecte seu repositorio GitHub e selecione o projeto
-4. Configuracao:
+1. Codigo no GitHub
+   - Crie conta em https://github.com
+   - Novo repositorio (ex: filmes-favoritos)
+   - Envie os arquivos do projeto SEM node_modules e SEM .env
+     (pode usar "Upload files" no GitHub se nao usar Git no PC)
 
-   Name:           filmes-favoritos (ou outro nome)
-   Region:         mesma regiao do Neon, se possivel
-   Branch:         main
-   Runtime:        Node
-   Build Command:  npm install
-   Start Command:  npm start
-   Instance Type:  Free
+2. Conta no Railway
+   - Acesse https://railway.app
+   - Entre com GitHub e autorize
 
-5. Em "Environment" -> "Environment Variables", adicione:
+3. Novo projeto
+   - "New Project" -> "Deploy from GitHub repo"
+   - Escolha o repositorio filmes-favoritos
 
-   DATABASE_URL = (cole a connection string completa do Neon)
+4. Banco PostgreSQL
+   - No projeto, clique em "+ New" ou "Add Service"
+   - Escolha "Database" -> "PostgreSQL"
+   - O Railway cria o banco sozinho
 
-   Exemplo:
-   postgresql://usuario:senha@ep-xxxx.us-east-1.aws.neon.tech/neondb?sslmode=require
+5. Ligar o banco ao site
+   - Clique no servico do seu app (Node)
+   - Aba "Variables" (Variaveis)
+   - "New Variable" -> "Add Reference" (ou "Connect")
+   - Selecione o PostgreSQL -> variavel DATABASE_URL
+   - Salve
 
-6. Clique em "Create Web Service"
-7. Aguarde o deploy (alguns minutos na primeira vez)
-8. Quando ficar "Live", voce recebe uma URL tipo:
-   https://filmes-favoritos.onrender.com
+6. Configuracao do app (se o Railway nao detectar sozinho)
+   - Settings do servico Node:
+     Build Command:  npm install
+     Start Command:  npm start
 
+7. Deploy
+   - Aguarde ficar "Active" / verde
+   - Em "Settings" -> "Networking" -> "Generate Domain"
+   - Copie a URL publica (ex: filmes-favoritos.up.railway.app)
 
-PASSO 4 - TESTAR
-----------------
-
-1. Abra a URL do Render no celular (qualquer rede)
-2. Cadastre um filme de teste
-3. Se der erro 500, veja os "Logs" no painel do Render
-
-
-OBSERVACOES IMPORTANTES
------------------------
-
-Plano gratis do Render:
-  - O site "dorme" apos ~15 min sem acesso
-  - A primeira visita depois disso pode demorar 30-60 segundos
-  - Para uso pessoal leve, costuma ser suficiente
-
-Plano gratis do Neon:
-  - Banco PostgreSQL com limite generoso para projetos pequenos
-
-Seguranca:
-  - A senha do banco NAO vai mais no codigo (server.js)
-  - Use so variaveis de ambiente no Render
-  - Nunca commite o arquivo .env
-
-Filmes que voce ja tem no PC:
-  - O banco local e o da nuvem sao separados
-  - Os filmes do PostgreSQL local NAO migram sozinhos
-  - Voce precisaria cadastrar de novo ou exportar/importar manualmente
+8. Teste no celular
+   - Abra a URL em qualquer rede (Wi-Fi ou 4G)
+   - Cadastre um filme de teste
 
 
-RODAR LOCALMENTE (LEMBRETE)
----------------------------
+ALTERNATIVA: RENDER + NEON
+--------------------------
 
-1. PostgreSQL ativo no PC
-2. Arquivo .env com DB_PASSWORD (ja criado na pasta do projeto)
+Se preferir nao usar Railway:
+
+  Banco:  https://neon.tech  -> copie a Connection string
+  Site:   https://render.com -> Web Service do GitHub
+  Variavel no Render: DATABASE_URL = connection string do Neon
+
+Build: npm install
+Start: npm start
+
+
+ANTES DE PUBLICAR
+-----------------
+
+- Nunca suba o arquivo .env para o GitHub
+- Filmes do PostgreSQL no seu PC nao vao para a nuvem sozinhos
+- Plano gratis pode "dormir" apos inatividade (primeira visita mais lenta)
+
+
+RODAR NO PC (LOCAL)
+-------------------
+
+1. PostgreSQL ativo
+2. Arquivo .env com DB_PASSWORD (veja .env.example)
 3. node server.js
-4. Abrir: http://localhost:3000
+4. http://localhost:3000
