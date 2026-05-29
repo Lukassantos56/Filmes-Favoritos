@@ -14,3 +14,9 @@ Requisitos locais:
 
 Hospedar na internet (acessar de qualquer lugar):
   - Veja o passo a passo em hospedagem.txt (Render + Neon, gratis)
+
+GitHub (repositorio ja preparado localmente):
+  1. Abra PowerShell nesta pasta
+  2. gh auth login   (escolha GitHub.com, HTTPS, login pelo navegador)
+  3. .\subir-github.ps1
+  Ou manualmente: gh repo create filmes-favoritos --public --source=. --remote=origin --push
