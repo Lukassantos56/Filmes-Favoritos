@@ -6,4 +6,6 @@ O objetivo foi transformar uma ideia pessoal em uma aplicação web funcional e 
 
 Sobre mim
  
- Sou estudante de Ciência de Dados e atualmente estou desenvolvendo meus conhecimentos em análise de dados, Power BI e desenvolvimento web. Busco unir esses conhecimentos em projetos práticos, utilizando a programação e a tecnologia para transformar ideias em soluções funcionais. Este projeto faz parte do meu processo de aprendizado e representa uma oportunidade de colocar em prática conhecimentos de desenvolvimento web, enquanto continuo evoluindo na área de dados.
+Sou estudante de Ciência de Dados e atualmente estou desenvolvendo meus conhecimentos em análise de dados, Power BI e desenvolvimento web. Busco unir esses conhecimentos em projetos práticos, utilizando a programação e a tecnologia para transformar ideias em soluções funcionais. Este projeto faz parte do meu processo de aprendizado e representa uma oportunidade de colocar em prática conhecimentos de desenvolvimento web, enquanto continuo evoluindo na área de dados.
+
+ link do site: https://filmes-favoritos-ebon.vercel.app/
